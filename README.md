@@ -1,5 +1,3 @@
-## Medical_Data_DeIdentification
-
 # Problem Statement
 
 - Medical data is sensitive and contains personally identifiable information (PII) that needs to be protected.
