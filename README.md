@@ -28,7 +28,7 @@
 - API layer: This layer should provide an API that can be used to integrate the model with other applications and workflows.
 - Model training and management layer: This layer should be responsible for training and managing the model, including updating the model with new data and retraining as needed.
 
-What’s out of scope
+# What’s out of scope
 
 - Data Ingestion layer pipelines will not be built as part of the basic prototype. Prototype will be API-driven.
 - Model will not be trained on a very large set of data.
