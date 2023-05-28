@@ -33,3 +33,11 @@
 - Data Ingestion layer pipelines will not be built as part of the basic prototype. Prototype will be API-driven.
 - Model will not be trained on a very large set of data.
 - Pictographic test reports as input will be supported later.
+
+
+# How To Run the App
+
+- `pip3 install -r requirements.txt`
+- `streamlit run src/app.py`
+- Voila! Enjoy deidentifying!
+- Will work best with Python v3.10.8
