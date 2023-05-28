@@ -1,5 +1,9 @@
+import os
 import re
 from datetime import datetime
+from io import BytesIO
+
+from PIL import Image
 
 from data_extractor import data_extractor
 from image_deidentifier import image_deidentifier
@@ -43,11 +47,15 @@ def _deidentify_files_streamlit(input_files):
     deidentified_files = []
     for file in input_files:
         if file.type in ["image/png", "image/jpg", "image/jpeg"]:
-            deid_img_path = image_deidentifier(file.name)
+            image_path = _save_image_file(file)
+            deid_img_path = image_deidentifier(image_path)
             deidentified_files.append(deid_img_path)
+            os.remove(image_path)
         elif file.type == "application/pdf":
-            deid_pdf_path = pdf_deidentifier(file.name)
+            pdf_path = _save_pdf_file(file)
+            deid_pdf_path = pdf_deidentifier(pdf_path)
             deidentified_files.append(deid_pdf_path)
+            os.remove(pdf_path)
         elif file.type == "text/plain":
             bytes_data = file.read()
             text_string = bytes_data.decode('utf-8')
@@ -86,3 +94,19 @@ def _deidentify_files_api(input_files):
 def _contains_only_periods(input_string):
     contains_only_periods = re.match(r"\.*$", input_string) is not None
     return contains_only_periods
+
+
+def _save_image_file(file):
+    image_bytes = file.read()
+    image = Image.open(BytesIO(image_bytes))
+    image_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + file.name
+    image.save(image_path)
+    return image_path
+
+
+def _save_pdf_file(file):
+    pdf_bytes = file.read()
+    pdf_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + file.name
+    with open(pdf_path, 'wb') as file:
+        file.write(pdf_bytes)
+    return pdf_path
