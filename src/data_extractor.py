@@ -4,7 +4,7 @@ import en_core_web_sm
 import spacy
 from spacy.tokenizer import Tokenizer
 
-from deidentification.text_deidentifier import text_deidentifier
+from text_deidentifier import text_deidentifier
 
 
 # ** Creating our EMR/EHR data extractor function that manages de-identification function by taking inputs **
@@ -18,10 +18,10 @@ def data_extractor(input_string):
     #    -> Containing all the medical fields
     #    -> Containing names of cities and states of India
 
-    with open('medical_fields.pkl', 'rb') as file:
+    with open('/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/medical_fields.pkl', 'rb') as file:
         medical_field_data = pickle.load(file)
 
-    with open('city_state_of_india.pkl', 'rb') as file:
+    with open('/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/city_state_of_india.pkl', 'rb') as file:
         city_state_list_data = pickle.load(file)
 
     # ** Loading spacy's pre trained model **
@@ -29,7 +29,8 @@ def data_extractor(input_string):
 
     # ** Now loading an en_core_web_sm model
     #    It is a re-trained spacy language model on medical data **
-    nlp_re_trained_model = spacy.load('trained_spacy_model')
+    nlp_re_trained_model = spacy.load(
+        '/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/trained_spacy_model')
     # nlp_re_trained_model = spacy.load('last_modified_model')
 
     # ** Loading a blank spacy model **
@@ -53,7 +54,7 @@ def data_extractor(input_string):
         if str(entities.text).count('X') < 2:
             tokens = nlp_tokenizer(str(entities.text))
             if sum([True if str(i).lower() in medical_field_data or '\n' in str(i) or
-                    str(i).lower() in city_state_list_data else False for i in tokens]) != len(tokens):
+                            str(i).lower() in city_state_list_data else False for i in tokens]) != len(tokens):
                 pre_list_for_p_org = [entities.text, entities.start_char, entities.end_char]
                 person_org_list.append(pre_list_for_p_org)
 

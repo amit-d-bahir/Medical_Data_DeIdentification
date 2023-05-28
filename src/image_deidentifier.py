@@ -5,11 +5,11 @@ import numpy as np
 import pytesseract
 from PIL.Image import Image
 
-from deidentification.data_extractor import data_extractor
+from data_extractor import data_extractor
 
 
 def image_deidentifier(image_path):
-    input_string = img_ocr(image_path)
+    input_string = _img_ocr(image_path)
     processed_string = data_extractor(input_string)
 
     now = datetime.now()
@@ -21,14 +21,14 @@ def image_deidentifier(image_path):
     return deid_img_path
 
 
-def img_ocr(image_path):
+def _img_ocr(image_path):
     # preprocessing it
-    image = img_preprocessing(image_path)
+    image = _img_preprocessing(image_path)
 
     return pytesseract.image_to_string(image, lang='eng')
 
 
-def img_preprocessing(image_path):
+def _img_preprocessing(image_path):
     # Getting the image from the URL provided
     image = Image.open(image_path)
     image_array = np.array(image)

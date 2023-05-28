@@ -4,7 +4,7 @@ from random import randint
 import pandas as pd
 from spacy.matcher.phrasematcher import PhraseMatcher
 
-from deidentification.utils import extract_regex
+from utils import extract_regex
 
 
 # ** Inputs **
@@ -46,7 +46,7 @@ def text_deidentifier(input_string, nlp_trained_model, nlp_blank_model, choice):
                         count = count + 1
                 if(count == 4):
                     original_string=original_string[:a[1]]+''*(a[2]-a[1]-4)+original_string[a[2]-4:]
-                elif(count == 3):
+                elif(count == 3 ):
                     original_string=original_string[:a[1]]+''*(a[2]-a[1]-2)+original_string[a[2]-2:]
                 else:
                     original_string=original_string[:a[1]]+''*(a[2]-a[1])+original_string[a[2]:]
@@ -267,7 +267,6 @@ def text_deidentifier(input_string, nlp_trained_model, nlp_blank_model, choice):
             j = j - 1
             count = count - 1
         j = a[-1]
-        # print(j)
         while j != -1 and original_string[j] not in [',', '\n', '.', ';']:
             j = j + 1
         endd = j
