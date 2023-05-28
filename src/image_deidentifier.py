@@ -13,7 +13,7 @@ def image_deidentifier(image_path):
     processed_string = data_extractor(input_string)
 
     now = datetime.now()
-    deid_img_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + "deidentified_" + now.strftime("%d-%m-%Y_%H:%M:%S:%f") + ".txt"
+    deid_img_path = "results/" + "deidentified_" + now.strftime("%d-%m-%Y_%H:%M:%S:%f") + ".txt"
 
     with open(deid_img_path, "a") as f:
         f.write(processed_string)

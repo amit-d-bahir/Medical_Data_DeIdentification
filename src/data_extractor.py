@@ -18,10 +18,10 @@ def data_extractor(input_string):
     #    -> Containing all the medical fields
     #    -> Containing names of cities and states of India
 
-    with open('/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/medical_fields.pkl', 'rb') as file:
+    with open('src/medical_fields.pkl', 'rb') as file:
         medical_field_data = pickle.load(file)
 
-    with open('/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/city_state_of_india.pkl', 'rb') as file:
+    with open('src/city_state_of_india.pkl', 'rb') as file:
         city_state_list_data = pickle.load(file)
 
     # ** Loading spacy's pre trained model **
@@ -29,8 +29,7 @@ def data_extractor(input_string):
 
     # ** Now loading an en_core_web_sm model
     #    It is a re-trained spacy language model on medical data **
-    nlp_re_trained_model = spacy.load(
-        '/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/src/trained_spacy_model')
+    nlp_re_trained_model = spacy.load('src/trained_spacy_model')
     # nlp_re_trained_model = spacy.load('last_modified_model')
 
     # ** Loading a blank spacy model **

@@ -61,7 +61,7 @@ def _deidentify_files_streamlit(input_files):
             text_string = bytes_data.decode('utf-8')
             processed_string = data_extractor(text_string)
             now = datetime.now()
-            deid_text_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + "deidentified_" \
+            deid_text_path = "results/" + "deidentified_" \
                              + now.strftime("%d-%m-%Y %H:%M:%S:%f") + ".txt"
             with open(deid_text_path, "a") as f:
                 f.write(processed_string)
@@ -99,14 +99,14 @@ def _contains_only_periods(input_string):
 def _save_image_file(file):
     image_bytes = file.read()
     image = Image.open(BytesIO(image_bytes))
-    image_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + file.name
+    image_path = "results/" + file.name
     image.save(image_path)
     return image_path
 
 
 def _save_pdf_file(file):
     pdf_bytes = file.read()
-    pdf_path = "/Users/amitbahir/Hackathon/Medical_Data_DeIdentification/results/" + file.name
+    pdf_path = "results/" + file.name
     with open(pdf_path, 'wb') as file:
         file.write(pdf_bytes)
     return pdf_path
